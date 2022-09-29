@@ -1,6 +1,9 @@
 package hu.petrik.harcosproject;
 
-import java.sql.SQLOutput;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +19,13 @@ public class Main {
         for (Bejegyzes b : bejegyzesek) {
             System.out.println(b);
         }
+        try {
+            readFromFile("bejegyzesek.csv");
+        } catch (FileNotFoundException e) {
+            System.err.println("A fájl nem létezik!");
+        } catch (IOException e) {
+            System.err.println("IOExeption hiba!");
+        }
     }
 
     public static void hozzaAd(String szerzo, String tartalom) {
@@ -26,14 +36,33 @@ public class Main {
     public static void userInput() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Adja meg hány bejegyzés szeretne létrehozni:");
-        int numOfItem = sc.nextInt();
+        int numOfItems = sc.nextInt();
         sc.nextLine();
-        for (int i = 0; i < numOfItem; i++) {
-            System.out.printf("\nAdja meg a(z) %d. szerzőt: ", i + 1);
-            String szerzo = sc.nextLine();
-            System.out.printf("\nAdja meg a(z) %d. bejegyzést: ", i + 1);
-            String tartalom = sc.nextLine();
-            hozzaAd(szerzo, tartalom);
+        if (numOfItems >= 0) {
+            for (int i = 0; i < numOfItems; i++) {
+                System.out.printf("\nAdja meg a(z) %d. szerzőt: ", i + 1);
+                String szerzo = sc.nextLine();
+                System.out.printf("\nAdja meg a(z) %d. bejegyzést: ", i + 1);
+                String tartalom = sc.nextLine();
+                hozzaAd(szerzo, tartalom);
+            }
+        } else {
+            System.err.println("Nem természetes számot adott meg!");
         }
+
+        sc.close();
+    }
+
+    public static void readFromFile(String fileName) throws IOException {
+        FileReader fr = new FileReader(fileName);
+        BufferedReader br = new BufferedReader(fr);
+        String line = br.readLine();
+        while (line != null && line.equals("")) {
+            String[] tmp = line.split(";");
+            hozzaAd(tmp[0], tmp[1]);
+            line = br.readLine();
+        }
+        br.close();
+        fr.close();
     }
 }
