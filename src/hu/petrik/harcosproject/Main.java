@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     static List<Bejegyzes> bejegyzesek;
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         bejegyzesek = new ArrayList<>();
@@ -19,13 +20,13 @@ public class Main {
         userInput();
         try {
             readFromFile("bejegyzesek.csv");
-            System.out.println("Beolvasva!");
         } catch (FileNotFoundException e) {
             System.err.println("A fájl nem létezik!");
         } catch (IOException e) {
             System.err.println("IOExeption hiba!");
         }
         randomLike();
+        edit();
         for (Bejegyzes b : bejegyzesek) {
             System.out.println(b);
         }
@@ -37,7 +38,6 @@ public class Main {
     }
 
     public static void userInput() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Adja meg hány bejegyzés szeretne létrehozni:");
         int numOfItems = sc.nextInt();
         sc.nextLine();
@@ -52,8 +52,6 @@ public class Main {
         } else {
             System.err.println("Nem természetes számot adott meg!");
         }
-
-        sc.close();
     }
 
     public static void readFromFile(String fileName) throws IOException {
@@ -74,5 +72,11 @@ public class Main {
         for (int i = 0; i < (bejegyzesek.size() * 20); i++) {
             bejegyzesek.get(rnd.nextInt(bejegyzesek.size())).like();
         }
+    }
+
+    public static void edit() {
+        System.out.println("Adja meg a szöveget amire változtatni szeretné a második bejegyzést:");
+        String line = sc.nextLine();
+        bejegyzesek.get(1).setTartalom(line);
     }
 }
