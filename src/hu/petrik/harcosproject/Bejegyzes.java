@@ -49,13 +49,13 @@ public class Bejegyzes {
     @Override
     public String toString() {
         String kimenet;
-        if (szerkesztve != letrejott) {
+        if (!szerkesztve.equals(letrejott)) {
             kimenet = String.format("%s-%d-%tF\n" +
                     "Szerkesztve: %tF\n" +
-                    "%s", szerzo, likeok, letrejott, szerkesztve, tartalom);
+                    "%s\n", szerzo, likeok, letrejott, szerkesztve, tartalom);
         } else {
             kimenet = String.format("%s-%d-%tF\n" +
-                    "%s", szerzo, likeok, letrejott, tartalom);
+                    "%s\n", szerzo, likeok, letrejott, tartalom);
         }
         return kimenet;
     }
