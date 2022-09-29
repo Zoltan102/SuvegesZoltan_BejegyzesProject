@@ -30,6 +30,7 @@ public class Main {
         for (Bejegyzes b : bejegyzesek) {
             System.out.println(b);
         }
+        mostLiked();
     }
 
     public static void hozzaAd(String szerzo, String tartalom) {
@@ -78,5 +79,15 @@ public class Main {
         System.out.println("Adja meg a szöveget amire változtatni szeretné a második bejegyzést:");
         String line = sc.nextLine();
         bejegyzesek.get(1).setTartalom(line);
+    }
+
+    public static void mostLiked() {
+        int index = 0;
+        for (int i = 0; i < bejegyzesek.size(); i++) {
+            if (bejegyzesek.get(index).getLikeok() < bejegyzesek.get(i).getLikeok()) {
+                index = i;
+            }
+        }
+        System.out.println("A legtöbb like:" + bejegyzesek.get(index).getLikeok());
     }
 }
