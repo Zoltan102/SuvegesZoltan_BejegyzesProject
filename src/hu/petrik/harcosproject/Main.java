@@ -31,6 +31,8 @@ public class Main {
             System.out.println(b);
         }
         mostLiked();
+        isLikedMore();
+        System.out.println("15 likenál kevesebbet kapottak száma:" + sumOfLikedLess());
     }
 
     public static void hozzaAd(String szerzo, String tartalom) {
@@ -89,5 +91,25 @@ public class Main {
             }
         }
         System.out.println("A legtöbb like:" + bejegyzesek.get(index).getLikeok());
+    }
+
+    public static void isLikedMore() {
+        for (Bejegyzes bejegyzes : bejegyzesek) {
+            if (35 < bejegyzes.getLikeok()) {
+                System.out.println("Van olyan bejegyzés ami 35-nél több likeot kapott!");
+            } else {
+                System.out.println("Nincs olyan bejegyzés ami 35-nél több likeot kapott!");
+            }
+        }
+    }
+
+    public static int sumOfLikedLess() {
+        int sum = 0;
+        for (Bejegyzes bejegyzes : bejegyzesek) {
+            if (15 > bejegyzes.getLikeok()) {
+                sum++;
+            }
+        }
+        return sum;
     }
 }
