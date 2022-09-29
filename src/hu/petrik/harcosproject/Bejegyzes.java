@@ -48,14 +48,15 @@ public class Bejegyzes {
 
     @Override
     public String toString() {
+
         String kimenet;
         if (!szerkesztve.equals(letrejott)) {
-            kimenet = String.format("%s-%d-%tF\n" +
-                    "Szerkesztve: %tF\n" +
-                    "%s\n", szerzo, likeok, letrejott, szerkesztve, tartalom);
+            kimenet = String.format("%s - %d - %tF %tT\n" +
+                    "Szerkesztve: %tF %tT\n" +
+                    "%s\n", szerzo, likeok, letrejott, letrejott, szerkesztve, szerkesztve, tartalom);
         } else {
-            kimenet = String.format("%s-%d-%tF\n" +
-                    "%s\n", szerzo, likeok, letrejott, tartalom);
+            kimenet = String.format("%s - %d - %tF %tT\n" +
+                    "%s\n", szerzo, likeok, letrejott, letrejott, tartalom);
         }
         return kimenet;
     }
