@@ -45,4 +45,18 @@ public class Bejegyzes {
     public void like() {
         this.likeok++;
     }
+
+    @Override
+    public String toString() {
+        String kimenet;
+        if (szerkesztve != letrejott) {
+            kimenet = String.format("%s-%d-%tF\n" +
+                    "Szerkesztve: %tF\n" +
+                    "%s", szerzo, likeok, letrejott, szerkesztve, tartalom);
+        } else {
+            kimenet = String.format("%s-%d-%tF\n" +
+                    "%s", szerzo, likeok, letrejott, tartalom);
+        }
+        return kimenet;
+    }
 }
